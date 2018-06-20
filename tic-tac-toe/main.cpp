@@ -7,25 +7,28 @@
 //
 
 #include <iostream>
+#include "TicTacToe.h"
 
-void displayGrid (int gridSize);
+void displayGrid (int gridSize, TicTacToe ticTacToe);
 
 //==============================================================
 int main(int argc, const char * argv[])
 {
     const int gridSize = 3;
     
+    TicTacToe tickTacToe(gridSize);
+    
     //Display welcome message and instructions
     std::cout << "Welcome to Tic-Tac-Toe!\n";
     std::cout << "Player 1 is 'o', Player 2 is 'x'.\n";
     
-    displayGrid (gridSize);
+    displayGrid (gridSize, tickTacToe);
     
     return 0;
 }
 
 //==============================================================
-void displayGrid (int gridSize)
+void displayGrid (int gridSize, TicTacToe ticTacToe)
 {
     const int gridPosHeight = 3;
     int gridPosCounter = 1;
@@ -41,7 +44,14 @@ void displayGrid (int gridSize)
                 std::cout << "\t";
                 if (rowSub == gridPosHeight / 2)
                 {
-                    std::cout << gridPosCounter;
+                    if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 0)
+                        std::cout << gridPosCounter;
+                    else if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 1)
+                        std::cout << "o";
+                    else
+                        std::cout << "x";
+                    
+                    
                     gridPosCounter++;
                 }
                 std::cout << "\t";
