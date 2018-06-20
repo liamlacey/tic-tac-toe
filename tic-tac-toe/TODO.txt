@@ -1,0 +1,15 @@
+Step Two: Write a program that lets two users play a typical 3x3 tic-tac-toe game
+
+- Display welcome message and instructions (UI)
+- Get current board state (backend)
+- Display board (UI)
+- Get current player (backend)
+- Instruct player to chose grid position (UI)
+- Read player input (UI)
+- Process player input, if valid input update board state, if invalid return error (backend)
+- Refresh board display or display error and instruct to try again (UI)
+- Check board/game state (backend)
+    - if there is a winning line, display 'win' message (UI)
+    - if all grid positions have been used by no winning line, display 'game over' mesage (UI)
+    - else change to next player and repeat process
+
