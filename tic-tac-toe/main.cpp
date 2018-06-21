@@ -15,16 +15,42 @@ void displayGrid (int gridSize, TicTacToe ticTacToe);
 int main(int argc, const char * argv[])
 {
     const auto gridSize = 3;
-    
+    const auto numOfGridSlots = gridSize * gridSize;
     TicTacToe tickTacToe(gridSize);
     
-    //Display welcome message and instructions
+    auto shouldExit = false;
+
     std::cout << "Welcome to Tic-Tac-Toe!\n";
     std::cout << "Player 1 is 'o', Player 2 is 'x'.\n";
     
-    displayGrid (gridSize, tickTacToe);
-    
-    std::cout << "Player " << tickTacToe.getCurrentPlayer() + 1 << ", select a grid position...\n";
+    //main loop that will only exit user requests to
+    do
+    {
+        displayGrid (gridSize, tickTacToe);
+        
+        std::cout << "Player " << tickTacToe.getCurrentPlayer() + 1 << ", select a grid position...\n";
+        
+        int input;
+        
+        //loop to get a valid number input, exit once got a valid input
+        do
+        {
+            std::cin >> input;
+
+            //if not got a valid number input
+            if (!(input >= 1 && input <= numOfGridSlots))
+            {
+                std::cout << "Invalid input - please try again." << std::endl;
+                //clear error flag on cin, and ignore anything else on same line
+                std::cin.clear();
+                std::cin.ignore(10000,'\n');
+            }
+            
+        } while (!(input >= 1 && input <= numOfGridSlots));
+        
+        tickTacToe.moveToNextPlayer();
+        
+    } while (!shouldExit);
     
     return 0;
 }
