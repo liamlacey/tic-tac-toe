@@ -34,3 +34,17 @@ void TicTacToe::moveToNextPlayer()
 {
     currentPlayer = !currentPlayer;
 }
+
+int TicTacToe::setGridPositionStateForCurrentPlayer (int pos)
+{
+    auto result = 0;
+    
+    //if the slot is available, set the new state based on current player
+    if (gridStates[pos] == 0)
+        gridStates[pos] = currentPlayer + 1;
+    //if the slot isn't available, flag to return an error
+    else
+        result = -1;
+    
+    return result;
+}

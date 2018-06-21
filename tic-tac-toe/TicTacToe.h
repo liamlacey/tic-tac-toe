@@ -20,6 +20,7 @@ public:
     ~TicTacToe();
     
     int getStateForGridPosition (int pos);
+    int setGridPositionStateForCurrentPlayer (int pos);
     
     int getCurrentPlayer();
     void moveToNextPlayer();
