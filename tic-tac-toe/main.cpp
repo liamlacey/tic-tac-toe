@@ -31,7 +31,7 @@ int main(int argc, const char * argv[])
         std::cout << "Player " << tickTacToe.getCurrentPlayer() + 1 << ", select a grid position...\n";
         
         auto input = 0;
-        auto result = 0;
+        auto setGridResult = 0;
         
         //loop to set the grid position state, exit once successfully done this
         do
@@ -52,19 +52,59 @@ int main(int argc, const char * argv[])
                 
             } while (!(input >= 1 && input <= numOfGridSlots));
             
-            result = tickTacToe.setGridPositionStateForCurrentPlayer(input - 1);
+            setGridResult = tickTacToe.setGridPositionStateForCurrentPlayer(input - 1);
             
             //if got an error attempting to set grid position stat
-            if (result == -1)
+            if (setGridResult == -1)
             {
                 std::cout << "The grid position is already being used - please try again." << std::endl;
             }
             
-        } while (result == -1);
-
-        tickTacToe.moveToNextPlayer();
+        } while (setGridResult == -1);
+        
+        int gameResult = tickTacToe.checkGameStatus();
+        
+        if (gameResult == 1 || gameResult == 2)
+        {
+            displayGrid (gridSize, tickTacToe);
+            
+            std::cout << "Player " << gameResult << " has won! Play again? (y/n)" << std::endl;
+            
+            char userSelection;
+            
+            do
+            {
+                std::cin >> userSelection;
+                
+                //if not got a valid number input
+                if (!(userSelection == 'y' || userSelection == 'n'))
+                {
+                    std::cout << "Invalid input - please try again." << std::endl;
+                    //clear error flag on cin, and ignore anything else on same line
+                    std::cin.clear();
+                    std::cin.ignore(10000,'\n');
+                }
+                
+            } while (!(userSelection == 'y' || userSelection == 'n'));
+            
+            if (userSelection == 'y')
+                tickTacToe.resetGame();
+            else
+                shouldExit = true;
+            
+        }
+        else if (gameResult == -1)
+        {
+            
+        }
+        else
+        {
+            tickTacToe.moveToNextPlayer();
+        }
         
     } while (!shouldExit);
+    
+    std::cout << "Goodbye!" << std::endl;
     
     return 0;
 }

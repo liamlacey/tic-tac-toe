@@ -25,6 +25,10 @@ public:
     int getCurrentPlayer();
     void moveToNextPlayer();
     
+    int checkGameStatus();
+    
+    void resetGame();
+    
 private:
     
     int gridSize;
