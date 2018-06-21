@@ -9,7 +9,8 @@
 #include "TicTacToe.h"
 
 TicTacToe::TicTacToe (int gridSize_)
-            :   gridSize(gridSize_)
+            :   gridSize(gridSize_),
+                currentPlayer(0)
 {
     gridStates.resize (gridSize * gridSize);
 }
@@ -22,4 +23,14 @@ TicTacToe::~TicTacToe()
 int TicTacToe::getStateForGridPosition (int pos)
 {
     return gridStates[pos];
+}
+
+int TicTacToe::getCurrentPlayer()
+{
+    return currentPlayer;
+}
+
+void TicTacToe::moveToNextPlayer()
+{
+    currentPlayer = !currentPlayer;
 }

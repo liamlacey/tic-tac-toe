@@ -21,11 +21,15 @@ public:
     
     int getStateForGridPosition (int pos);
     
+    int getCurrentPlayer();
+    void moveToNextPlayer();
+    
 private:
     
     int gridSize;
     std::vector<int> gridStates;
     
+    int currentPlayer;
 };
 
 #endif /* TicTacToe_h */

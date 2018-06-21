@@ -24,6 +24,8 @@ int main(int argc, const char * argv[])
     
     displayGrid (gridSize, tickTacToe);
     
+    std::cout << "Player " << tickTacToe.getCurrentPlayer() + 1 << ", select a grid position...\n";
+    
     return 0;
 }
 
