@@ -27,6 +27,7 @@ public:
 private:
     
     int gridSize;
+    //0 = available, 1 = o, 2 = x
     std::vector<int> gridStates;
     
     int currentPlayer;

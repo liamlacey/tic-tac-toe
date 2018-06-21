@@ -14,7 +14,7 @@ void displayGrid (int gridSize, TicTacToe ticTacToe);
 //==============================================================
 int main(int argc, const char * argv[])
 {
-    const int gridSize = 3;
+    const auto gridSize = 3;
     
     TicTacToe tickTacToe(gridSize);
     
@@ -32,16 +32,16 @@ int main(int argc, const char * argv[])
 //==============================================================
 void displayGrid (int gridSize, TicTacToe ticTacToe)
 {
-    const int gridPosHeight = 3;
-    int gridPosCounter = 1;
+    const auto gridPosHeight = 3;
+    auto gridPosCounter = 1;
     
     std::cout << "\n";
     
-    for (int row = 0; row < gridSize; row++)
+    for (auto row = 0; row < gridSize; row++)
     {
-        for (int rowSub = 0; rowSub < gridPosHeight; rowSub++)
+        for (auto rowSub = 0; rowSub < gridPosHeight; rowSub++)
         {
-            for (int col = 0; col < gridSize; col++)
+            for (auto col = 0; col < gridSize; col++)
             {
                 std::cout << "\t";
                 if (rowSub == gridPosHeight / 2)
@@ -52,7 +52,6 @@ void displayGrid (int gridSize, TicTacToe ticTacToe)
                         std::cout << "o";
                     else
                         std::cout << "x";
-                    
                     
                     gridPosCounter++;
                 }
@@ -65,10 +64,9 @@ void displayGrid (int gridSize, TicTacToe ticTacToe)
             std::cout << "\n";
         }
         
-        if ( row != gridSize - 1)
+        if (row != gridSize - 1)
         {
-            
-            for (int col = 0; col < gridSize; col++)
+            for (auto col = 0; col < gridSize; col++)
             {
                 if( col == 0)
                     std::cout << "-";
