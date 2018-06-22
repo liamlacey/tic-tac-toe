@@ -107,7 +107,7 @@ int TicTacToe::checkGameStatus()
             if (gridStates[(row * gridSize) + col] != stateToCheckFor)
                 break;
             
-            if (col < gridSize - 2)
+            if (col == gridSize - 2)
                 return stateToCheckFor;
         }
     
