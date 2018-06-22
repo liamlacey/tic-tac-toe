@@ -12,6 +12,6 @@ x Check board/game state (backend)
     x if there is a winning line, display 'win' message (UI)
     x if all grid positions have been used by no winning line, display 'game over' mesage (UI)
     x else change to next player and repeat process
-- comment complex code segments
-- comment functions in TicTacToe header
+x comment complex code segments
+x comment functions in TicTacToe header
 
