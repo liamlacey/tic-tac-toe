@@ -23,7 +23,7 @@ int main(int argc, const char * argv[])
     auto shouldExit = false;
     
     std::cout << "Welcome to Tic-Tac-Toe!\n";
-    std::cout << "Player 1 is 'o', Player 2 is 'x'.\n";
+    std::cout << "Player 1 is 'x', Player 2 is 'o'.\n";
     
     //main loop that will only exit if user requests to
     do
@@ -61,9 +61,9 @@ void displayGrid (const int gridSize, TicTacToe &ticTacToe)
                     if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 0)
                         std::cout << gridPosCounter;
                     else if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 1)
-                        std::cout << "o";
-                    else
                         std::cout << "x";
+                    else
+                        std::cout << "o";
                     
                     gridPosCounter++;
                 }

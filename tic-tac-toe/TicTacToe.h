@@ -32,7 +32,7 @@ public:
 private:
     
     int gridSize;
-    //0 = available, 1 = o, 2 = x
+    //0 = available, 1 = player 1 / x, 2 = player 2 / o
     std::vector<int> gridStates;
     
     int currentPlayer;
