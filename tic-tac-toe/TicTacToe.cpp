@@ -111,8 +111,17 @@ int TicTacToe::checkGameStatus()
                 return stateToCheckFor;
         }
     
-    return 0;
     
+    for (auto i = 0; i < gridStates.size(); i++)
+    {
+        if (gridStates[i] == 0)
+            break;
+        
+        if (i == gridStates.size() - 1)
+            return -1;
+    }
+    
+    return 0;
 }
 
 void TicTacToe::resetGame()

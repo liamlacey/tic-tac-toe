@@ -64,14 +64,27 @@ int main(int argc, const char * argv[])
         
         int gameResult = tickTacToe.checkGameStatus();
         
-        if (gameResult == 1 || gameResult == 2)
+        //If the game is still in play
+        if (gameResult == 0)
+        {
+            tickTacToe.moveToNextPlayer();
+        }
+        else
         {
             displayGrid (gridSize, tickTacToe);
             
-            std::cout << "Player " << gameResult << " has won! Play again? (y/n)" << std::endl;
+            //if there is now a winner
+            if (gameResult == 1 || gameResult == 2)
+                std::cout << "Player " << gameResult << " has won! Play again? (y/n)" << std::endl;
+            
+            //else all grid positions were used but no winner
+            else
+                 std::cout << "Game over! Play again? (y/n)" << std::endl;
+                
             
             char userSelection;
             
+            //loop to get a valid keyboard response, exit once got a valid response
             do
             {
                 std::cin >> userSelection;
@@ -91,15 +104,6 @@ int main(int argc, const char * argv[])
                 tickTacToe.resetGame();
             else
                 shouldExit = true;
-            
-        }
-        else if (gameResult == -1)
-        {
-            
-        }
-        else
-        {
-            tickTacToe.moveToNextPlayer();
         }
         
     } while (!shouldExit);
