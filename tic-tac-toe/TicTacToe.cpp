@@ -53,6 +53,8 @@ int TicTacToe::checkGameStatus()
 {
     int stateToCheckFor = GRID_STATE_UNUSED;
     
+    //check for a winning horizontal line, and return the relevant 'player won' status value if found...
+    
     for (auto row = 0; row < gridSize; row++)
     {
         for (auto col = 0; col < gridSize; col++)
@@ -67,6 +69,8 @@ int TicTacToe::checkGameStatus()
                 return stateToCheckFor;
         }
     }
+    
+    //check for a winning vertical line, and return the relevant 'player won' status value if found...
     
     for (auto col = 0; col < gridSize; col++)
     {
@@ -84,6 +88,8 @@ int TicTacToe::checkGameStatus()
     }
     
     
+    //check for a winning top-left to bottom-right line, and return the relevant 'player won' status value if found...
+    
     stateToCheckFor = gridStates[0];
     
     if (stateToCheckFor != GRID_STATE_UNUSED)
@@ -97,6 +103,7 @@ int TicTacToe::checkGameStatus()
             return stateToCheckFor;
     }
     
+    //check for a winning bottom-left to top-right line, and return the relevant 'player won' status value if found...
     
     stateToCheckFor = gridStates[gridSize - 1];
     
@@ -112,6 +119,8 @@ int TicTacToe::checkGameStatus()
         }
     
     
+    //check for all grid positions being used, and return the 'game over' status value if found...
+    
     for (auto i = 0; i < gridStates.size(); i++)
     {
         if (gridStates[i] == GRID_STATE_UNUSED)
@@ -121,6 +130,7 @@ int TicTacToe::checkGameStatus()
             return GAME_STATUS_OVER;
     }
     
+    //if got to this point in the function, return the 'continue game' status value
     return GAME_STATUS_CONTINUE;
 }
 

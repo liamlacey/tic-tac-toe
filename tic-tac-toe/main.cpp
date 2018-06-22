@@ -58,6 +58,7 @@ void displayGrid (const int gridSize, TicTacToe &ticTacToe)
                 std::cout << "\t";
                 if (rowSub == gridPosHeight / 2)
                 {
+                    //display the grid position number, an 'x', or a 'o', depending on the state of the grid position
                     if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == TicTacToe::GRID_STATE_UNUSED)
                         std::cout << gridPosCounter;
                     else if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == TicTacToe::GRID_STATE_PLAYER_1)
