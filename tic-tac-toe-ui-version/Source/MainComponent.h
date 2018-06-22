@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "../../shared-code/TicTacToe.h"
 
 //==============================================================================
 /*
@@ -29,7 +30,14 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
-
-
+    
+    OwnedArray<TextButton> gridButtons;
+    Label textLabel;
+    Slider gridSizeSlider;
+    TextButton resetButton;
+    
+    TicTacToe ticTakToe;
+    int gridSize, numOfGridSlots;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

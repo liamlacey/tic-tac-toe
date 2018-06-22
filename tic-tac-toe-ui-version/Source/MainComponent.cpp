@@ -10,8 +10,31 @@
 
 //==============================================================================
 MainComponent::MainComponent()
+:   ticTakToe (3),
+    gridSize (3),
+    numOfGridSlots (3 * 3)
 {
-    setSize (600, 400);
+    for (auto i = 0; i < numOfGridSlots; i++)
+    {
+        gridButtons.add (new TextButton());
+        addAndMakeVisible (gridButtons[i]);
+        
+        gridButtons[i]->setClickingTogglesState (true);
+    }
+    
+    addAndMakeVisible (textLabel);
+    textLabel.setText (translate ("Player 1: place your x..."), dontSendNotification);
+    textLabel.setJustificationType (Justification::centred);
+    
+    addAndMakeVisible (gridSizeSlider);
+    gridSizeSlider.setSliderStyle (Slider::LinearHorizontal);
+    gridSizeSlider.setRange(3, 20, 1);
+    
+    addAndMakeVisible (resetButton);
+    resetButton.setButtonText (translate ("Reset"));
+    
+    setSize (600, 600);
+    
 }
 
 MainComponent::~MainComponent()
@@ -21,17 +44,32 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
-    g.setFont (Font (16.0f));
-    g.setColour (Colours::white);
-    g.drawText ("Hello World!", getLocalBounds(), Justification::centred, true);
 }
 
 void MainComponent::resized()
 {
-    // This is called when the MainComponent is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
+    auto gridWidth = getWidth() * 0.8;
+    auto gridHeight = getHeight() * 0.8;
+    auto gridX = getWidth() * 0.1;
+    auto gridY = getHeight() * 0.1;
+    auto gridButtonWidth = gridWidth / gridSize;
+    auto gridButtonHeight = gridHeight / gridSize;
+    
+    for (auto row = 0; row < gridSize; row++)
+    {
+        for (auto col = 0; col < gridSize; col++)
+        {
+            gridButtons[(row * gridSize) + col]->setBounds (gridX + (gridButtonWidth * col),
+                                                            gridY + (gridButtonHeight * row),
+                                                            gridButtonWidth,
+                                                            gridButtonHeight);
+        }
+    }
+    
+    textLabel.setBounds (0, 0, getWidth(), getHeight() * 0.1);
+    
+    gridSizeSlider.setBounds (0, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
+    resetButton.setBounds (getWidth() / 2, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
+    
 }
