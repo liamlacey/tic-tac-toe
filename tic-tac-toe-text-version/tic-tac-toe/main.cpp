@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "TicTacToe.h"
+#include "../../shared-code/TicTacToe.h"
 
 void displayGrid (const int gridSize, TicTacToe &ticTacToe);
 void choosePosition (const int numOfGridSlots, TicTacToe &ticTacToe);
