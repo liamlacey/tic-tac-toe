@@ -8,8 +8,10 @@ x Instruct player to chose grid position (UI)
 x Read player input (UI)
 x Process player input, if valid input update board state, if invalid return error (backend)
 x Refresh board display or display error and instruct to try again (UI)
-- Check board/game state (backend)
-    - if there is a winning line, display 'win' message (UI)
-    - if all grid positions have been used by no winning line, display 'game over' mesage (UI)
-    - else change to next player and repeat process
+x Check board/game state (backend)
+    x if there is a winning line, display 'win' message (UI)
+    x if all grid positions have been used by no winning line, display 'game over' mesage (UI)
+    x else change to next player and repeat process
+- comment complex code segments
+- comment functions in TicTacToe header
 

@@ -29,10 +29,26 @@ public:
     
     void resetGame();
     
+    enum GridStateValues
+    {
+        GRID_STATE_UNUSED = 0,
+        GRID_STATE_PLAYER_1,
+        GRID_STATE_PLAYER_2
+    };
+    
+    enum GameStatusValues
+    {
+        GAME_STATUS_OVER = -1,
+        GAME_STATUS_CONTINUE,
+        GAME_STATUS_1_WON,
+        GAME_STATUS_2_WON
+    };
+    
 private:
     
     int gridSize;
-    //0 = available, 1 = player 1 / x, 2 = player 2 / o
+    
+    //uses GridStateValues
     std::vector<int> gridStates;
     
     int currentPlayer;

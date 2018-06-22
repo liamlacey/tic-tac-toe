@@ -58,9 +58,9 @@ void displayGrid (const int gridSize, TicTacToe &ticTacToe)
                 std::cout << "\t";
                 if (rowSub == gridPosHeight / 2)
                 {
-                    if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 0)
+                    if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == TicTacToe::GRID_STATE_UNUSED)
                         std::cout << gridPosCounter;
-                    else if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == 1)
+                    else if (ticTacToe.getStateForGridPosition(gridPosCounter - 1) == TicTacToe::GRID_STATE_PLAYER_1)
                         std::cout << "x";
                     else
                         std::cout << "o";
@@ -141,7 +141,7 @@ bool checkGameStatus (const int gridSize, TicTacToe &ticTacToe)
     int gameResult = ticTacToe.checkGameStatus();
     
     //If the game is still in play
-    if (gameResult == 0)
+    if (gameResult == TicTacToe::GAME_STATUS_CONTINUE)
     {
         ticTacToe.moveToNextPlayer();
     }
@@ -150,7 +150,7 @@ bool checkGameStatus (const int gridSize, TicTacToe &ticTacToe)
         displayGrid (gridSize, ticTacToe);
         
         //if there is now a winner
-        if (gameResult == 1 || gameResult == 2)
+        if (gameResult == TicTacToe::GAME_STATUS_1_WON || gameResult == TicTacToe::GAME_STATUS_2_WON)
             std::cout << "Player " << gameResult << " has won! Play again? (y/n)" << std::endl;
         
         //else all grid positions were used but no winner

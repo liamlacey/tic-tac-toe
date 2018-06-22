@@ -40,7 +40,7 @@ int TicTacToe::setGridPositionStateForCurrentPlayer (int pos)
     auto result = 0;
     
     //if the slot is available, set the new state based on current player
-    if (gridStates[pos] == 0)
+    if (gridStates[pos] == GRID_STATE_UNUSED)
         gridStates[pos] = currentPlayer + 1;
     //if the slot isn't available, flag to return an error
     else
@@ -51,7 +51,7 @@ int TicTacToe::setGridPositionStateForCurrentPlayer (int pos)
 
 int TicTacToe::checkGameStatus()
 {
-    auto stateToCheckFor = 0;
+    int stateToCheckFor = GRID_STATE_UNUSED;
     
     for (auto row = 0; row < gridSize; row++)
     {
@@ -60,7 +60,7 @@ int TicTacToe::checkGameStatus()
             if (col == 0)
                 stateToCheckFor = gridStates[(row * gridSize) + col];
 
-            if (stateToCheckFor == 0 || gridStates[(row * gridSize) + col] != stateToCheckFor)
+            if (stateToCheckFor == GRID_STATE_UNUSED || gridStates[(row * gridSize) + col] != stateToCheckFor)
                 break;
             
             if (col == gridSize - 1)
@@ -75,7 +75,7 @@ int TicTacToe::checkGameStatus()
             if (row == 0)
                 stateToCheckFor = gridStates[(row * gridSize) + col];
             
-            if (stateToCheckFor == 0 || gridStates[(row * gridSize) + col] != stateToCheckFor)
+            if (stateToCheckFor == GRID_STATE_UNUSED || gridStates[(row * gridSize) + col] != stateToCheckFor)
                 break;
             
             if (row == gridSize - 1)
@@ -86,7 +86,7 @@ int TicTacToe::checkGameStatus()
     
     stateToCheckFor = gridStates[0];
     
-    if (stateToCheckFor != 0)
+    if (stateToCheckFor != GRID_STATE_UNUSED)
         
     for (auto i = 1; i < gridSize; i++)
     {
@@ -100,7 +100,7 @@ int TicTacToe::checkGameStatus()
     
     stateToCheckFor = gridStates[gridSize - 1];
     
-    if (stateToCheckFor != 0)
+    if (stateToCheckFor != GRID_STATE_UNUSED)
         
         for (auto row = gridSize - 1, col = 0; col < gridSize - 1; col++, row--)
         {
@@ -114,20 +114,20 @@ int TicTacToe::checkGameStatus()
     
     for (auto i = 0; i < gridStates.size(); i++)
     {
-        if (gridStates[i] == 0)
+        if (gridStates[i] == GRID_STATE_UNUSED)
             break;
         
         if (i == gridStates.size() - 1)
-            return -1;
+            return GAME_STATUS_OVER;
     }
     
-    return 0;
+    return GAME_STATUS_CONTINUE;
 }
 
 void TicTacToe::resetGame()
 {
     for (auto i = 0; i < gridStates.size(); i++)
-        gridStates[i] = 0;
+        gridStates[i] = GRID_STATE_UNUSED;
     
     currentPlayer = 0;
 }
