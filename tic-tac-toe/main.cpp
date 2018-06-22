@@ -17,13 +17,32 @@ void clearAndIgnoreCin();
 //==============================================================
 int main(int argc, const char * argv[])
 {
-    const auto gridSize = 3;
-    TicTacToe ticTacToe(gridSize);
-    const auto numOfGridSlots = gridSize * gridSize;
     auto shouldExit = false;
     
     std::cout << "Welcome to Tic-Tac-Toe!\n";
     std::cout << "Player 1 is 'x', Player 2 is 'o'.\n";
+    
+    std::cout << "Please enter a grid size number (e.g. for a 3x3 grid enter 3)...\n";
+    
+    auto input = 0;
+    
+    //loop to get a valid grid size number response, exit once got a valid number repsonse
+    do
+    {
+        std::cin >> input;
+        
+        //if not got a valid number input
+        if (!std::cin || input < 3)
+        {
+            std::cout << "Invalid input - please try again." << std::endl;
+            clearAndIgnoreCin();
+        }
+        
+    } while (!std::cin || input < 3);
+    
+    const int gridSize = input;
+    TicTacToe ticTacToe(gridSize);
+    const auto numOfGridSlots = gridSize * gridSize;
     
     //main loop that will only exit if user requests to
     do
@@ -187,9 +206,10 @@ bool checkGameStatus (const int gridSize, TicTacToe &ticTacToe)
 //==============================================================
 void clearAndIgnoreCin()
 {
-    //clear error flag on cin, and ignore anything else on same line
+    //reset failbit
     std::cin.clear();
-    std::cin.ignore(10000,'\n');
+    //skip bad input
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 }
 
 
