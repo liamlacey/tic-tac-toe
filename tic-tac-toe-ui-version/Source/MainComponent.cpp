@@ -95,6 +95,7 @@ void MainComponent::buttonClicked (Button *button)
     {
         createGrid();
         gridSizeSlider.setVisible (true);
+        textLabel.setColour (Label::textColourId, Colours::white);
         textLabel.setText (translate ("Chose a new grid size (bottom slider), or PLAYER 1: Place Your X..."), dontSendNotification);
         
         ticTacToe.resetGame();
@@ -158,6 +159,7 @@ void MainComponent::checkGameStatus()
         //if there is now a winner
         if (gameResult == TicTacToe::GAME_STATUS_1_WON || gameResult == TicTacToe::GAME_STATUS_2_WON)
         {
+            textLabel.setColour (Label::textColourId, Colours::lightgreen);
             textLabel.setText (translate ("PLAYER ") + String (gameResult) + translate(" HAS WON! Press 'Reset' to play again."),
                               dontSendNotification);
             
@@ -166,6 +168,7 @@ void MainComponent::checkGameStatus()
         //else all grid positions were used but no winner
         else
         {
+            textLabel.setColour (Label::textColourId, Colours::red);
             textLabel.setText (translate ("GAME OVER! Nobody won. Press 'Reset' to play again."),
                                dontSendNotification);
         }
