@@ -34,6 +34,9 @@ public:
     //Returns the current game status (see GameStatusValues)
     int checkGameStatus();
     
+    //Sets the grid size
+    void setGridSize (int gridSize_);
+    
     //Resets all needed variables to restart the game
     void resetGame();
     

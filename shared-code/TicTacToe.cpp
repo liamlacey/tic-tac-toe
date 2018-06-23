@@ -134,6 +134,12 @@ int TicTacToe::checkGameStatus()
     return GAME_STATUS_CONTINUE;
 }
 
+void TicTacToe::setGridSize (int gridSize_)
+{
+    gridSize = gridSize_;
+    gridStates.resize (gridSize * gridSize);
+}
+
 void TicTacToe::resetGame()
 {
     for (auto i = 0; i < gridStates.size(); i++)

@@ -10,18 +10,11 @@
 
 //==============================================================================
 MainComponent::MainComponent()
-:   ticTakToe (3),
+:   ticTacToe (3),
     gridSize (3),
     numOfGridSlots (3 * 3)
 {
-    for (auto i = 0; i < numOfGridSlots; i++)
-    {
-        gridButtons.add (new TextButton());
-        
-        addAndMakeVisible (gridButtons[i]);
-        gridButtons[i]->setClickingTogglesState (true);
-        gridButtons[i]->addListener (this);
-    }
+    createGrid();
     
     addAndMakeVisible (textLabel);
     textLabel.setText (translate ("Player 1: place your x..."), dontSendNotification);
@@ -37,7 +30,6 @@ MainComponent::MainComponent()
     resetButton.addListener (this);
     
     setSize (600, 600);
-    
 }
 
 MainComponent::~MainComponent()
@@ -75,7 +67,6 @@ void MainComponent::resized()
     
     gridSizeSlider.setBounds (0, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
     resetButton.setBounds (getWidth() / 2, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
-    
 }
 
 //==============================================================================
@@ -100,7 +91,24 @@ void MainComponent::sliderValueChanged (Slider *slider)
 {
     if (slider == &gridSizeSlider)
     {
-        std::cout << "Grid size slider value: " << slider->getValue() << std::endl;
+        gridSize = slider->getValue();
+        numOfGridSlots = gridSize * gridSize;
+        createGrid();
+        resized();
         
+        ticTacToe.setGridSize (gridSize);
+    }
+}
+
+void MainComponent::createGrid()
+{
+    gridButtons.clear();
+    
+    for (auto i = 0; i < numOfGridSlots; i++)
+    {
+        gridButtons.insert (i, new TextButton());
+        addAndMakeVisible (gridButtons[i]);
+        gridButtons[i]->setClickingTogglesState (true);
+        gridButtons[i]->addListener (this);
     }
 }

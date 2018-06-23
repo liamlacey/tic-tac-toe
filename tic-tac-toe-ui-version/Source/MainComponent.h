@@ -34,6 +34,9 @@ public:
     void sliderValueChanged (Slider *slider) override;
 
 private:
+    
+    void createGrid();
+    
     //==============================================================================
     // Your private member variables go here...
     
@@ -42,7 +45,7 @@ private:
     Slider gridSizeSlider;
     TextButton resetButton;
     
-    TicTacToe ticTakToe;
+    TicTacToe ticTacToe;
     int gridSize, numOfGridSlots;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
