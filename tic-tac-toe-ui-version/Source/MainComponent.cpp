@@ -17,7 +17,7 @@ MainComponent::MainComponent()
     createGrid();
     
     addAndMakeVisible (textLabel);
-    textLabel.setText (translate ("Chose a new grid size, or PLAYER 1: Place Your X..."), dontSendNotification);
+    textLabel.setText (translate ("Chose a new grid size (bottom slider), or PLAYER 1: Place Your X..."), dontSendNotification);
     textLabel.setJustificationType (Justification::centred);
     
     addAndMakeVisible (gridSizeSlider);
@@ -65,8 +65,8 @@ void MainComponent::resized()
     
     textLabel.setBounds (0, 0, getWidth(), getHeight() * 0.1);
     
-    gridSizeSlider.setBounds (0, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
-    resetButton.setBounds (getWidth() / 2, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
+    resetButton.setBounds (getWidth() * 0.05, getHeight() * 0.91, (getWidth() / 2) * 0.8, getHeight() * 0.08);
+    gridSizeSlider.setBounds ((getWidth() / 2) + (getWidth() * 0.05), getHeight() * 0.91, (getWidth() / 2) * 0.8, getHeight() * 0.08);
 }
 
 //==============================================================================
@@ -84,8 +84,9 @@ void MainComponent::buttonClicked (Button *button)
             button->setButtonText (buttonString);
             button->setEnabled(false);
             
-            ticTacToe.setGridPositionStateForCurrentPlayer(i);
+            gridSizeSlider.setVisible (false);
             
+            ticTacToe.setGridPositionStateForCurrentPlayer(i);
             checkGameStatus();
         }
     }
@@ -93,7 +94,8 @@ void MainComponent::buttonClicked (Button *button)
     if (button == &resetButton)
     {
         createGrid();
-        textLabel.setText (translate ("Chose a new grid size, or PLAYER 1: Place Your X..."), dontSendNotification);
+        gridSizeSlider.setVisible (true);
+        textLabel.setText (translate ("Chose a new grid size (bottom slider), or PLAYER 1: Place Your X..."), dontSendNotification);
         
         ticTacToe.resetGame();
     }
