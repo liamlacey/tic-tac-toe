@@ -16,7 +16,10 @@
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public Component
+class MainComponent   : public Component,
+                        public Button::Listener,
+                        public Slider::Listener
+
 {
 public:
     //==============================================================================
@@ -26,6 +29,9 @@ public:
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
+    
+    void buttonClicked (Button *button) override;
+    void sliderValueChanged (Slider *slider) override;
 
 private:
     //==============================================================================

@@ -17,9 +17,10 @@ MainComponent::MainComponent()
     for (auto i = 0; i < numOfGridSlots; i++)
     {
         gridButtons.add (new TextButton());
-        addAndMakeVisible (gridButtons[i]);
         
+        addAndMakeVisible (gridButtons[i]);
         gridButtons[i]->setClickingTogglesState (true);
+        gridButtons[i]->addListener (this);
     }
     
     addAndMakeVisible (textLabel);
@@ -28,10 +29,12 @@ MainComponent::MainComponent()
     
     addAndMakeVisible (gridSizeSlider);
     gridSizeSlider.setSliderStyle (Slider::LinearHorizontal);
-    gridSizeSlider.setRange(3, 20, 1);
+    gridSizeSlider.setRange (3, 20, 1);
+    gridSizeSlider.addListener (this);
     
     addAndMakeVisible (resetButton);
     resetButton.setButtonText (translate ("Reset"));
+    resetButton.addListener (this);
     
     setSize (600, 600);
     
@@ -47,6 +50,7 @@ void MainComponent::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 }
 
+//==============================================================================
 void MainComponent::resized()
 {
     auto gridWidth = getWidth() * 0.8;
@@ -72,4 +76,31 @@ void MainComponent::resized()
     gridSizeSlider.setBounds (0, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
     resetButton.setBounds (getWidth() / 2, getHeight() * 0.9, getWidth() / 2, getHeight() * 0.1);
     
+}
+
+//==============================================================================
+void MainComponent::buttonClicked (Button *button)
+{
+    for (auto i = 0; i < gridButtons.size(); i++)
+    {
+        if (button == gridButtons[i])
+        {
+            std::cout << "Clicked grid button " << i << std::endl;
+        }
+    }
+    
+    if (button == &resetButton)
+    {
+        std::cout << "Clicked reset button" << std::endl;
+    }
+}
+
+//==============================================================================
+void MainComponent::sliderValueChanged (Slider *slider)
+{
+    if (slider == &gridSizeSlider)
+    {
+        std::cout << "Grid size slider value: " << slider->getValue() << std::endl;
+        
+    }
 }
