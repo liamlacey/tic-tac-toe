@@ -17,7 +17,7 @@ MainComponent::MainComponent()
     createGrid();
     
     addAndMakeVisible (textLabel);
-    textLabel.setText (translate ("Player 1: place your x..."), dontSendNotification);
+    textLabel.setText (translate ("Chose a new grid size, or PLAYER 1: Place Your X..."), dontSendNotification);
     textLabel.setJustificationType (Justification::centred);
     
     addAndMakeVisible (gridSizeSlider);
@@ -76,13 +76,26 @@ void MainComponent::buttonClicked (Button *button)
     {
         if (button == gridButtons[i])
         {
-            std::cout << "Clicked grid button " << i << std::endl;
+            String buttonString("X");
+            
+            if (ticTacToe.getCurrentPlayer() == 1)
+                buttonString = "O";
+            
+            button->setButtonText (buttonString);
+            button->setEnabled(false);
+            
+            ticTacToe.setGridPositionStateForCurrentPlayer(i);
+            
+            checkGameStatus();
         }
     }
     
     if (button == &resetButton)
     {
-        std::cout << "Clicked reset button" << std::endl;
+        createGrid();
+        textLabel.setText (translate ("Chose a new grid size, or PLAYER 1: Place Your X..."), dontSendNotification);
+        
+        ticTacToe.resetGame();
     }
 }
 
@@ -94,12 +107,12 @@ void MainComponent::sliderValueChanged (Slider *slider)
         gridSize = slider->getValue();
         numOfGridSlots = gridSize * gridSize;
         createGrid();
-        resized();
         
         ticTacToe.setGridSize (gridSize);
     }
 }
 
+//==============================================================================
 void MainComponent::createGrid()
 {
     gridButtons.clear();
@@ -109,6 +122,52 @@ void MainComponent::createGrid()
         gridButtons.insert (i, new TextButton());
         addAndMakeVisible (gridButtons[i]);
         gridButtons[i]->setClickingTogglesState (true);
+        gridButtons[i]->setEnabled (true);
         gridButtons[i]->addListener (this);
     }
+    
+    resized();
 }
+
+//==============================================================================
+void MainComponent::disableGrid()
+{
+    for (auto i = 0; i < gridButtons.size(); i++)
+        gridButtons[i]->setEnabled(false);
+}
+
+//==============================================================================
+void MainComponent::checkGameStatus()
+{
+    int gameResult = ticTacToe.checkGameStatus();
+    
+    //If the game is still in play
+    if (gameResult == TicTacToe::GAME_STATUS_CONTINUE)
+    {
+        ticTacToe.moveToNextPlayer();
+        
+        if (ticTacToe.getCurrentPlayer() == 0)
+            textLabel.setText (translate ("PLAYER 1: Place Your X..."), dontSendNotification);
+        else
+            textLabel.setText (translate ("PLAYER 2: Place Your O..."), dontSendNotification);
+    }
+    else
+    {
+        //if there is now a winner
+        if (gameResult == TicTacToe::GAME_STATUS_1_WON || gameResult == TicTacToe::GAME_STATUS_2_WON)
+        {
+            textLabel.setText (translate ("PLAYER ") + String (gameResult) + translate(" HAS WON! Press 'Reset' to play again."),
+                              dontSendNotification);
+            
+            disableGrid();
+        }
+        //else all grid positions were used but no winner
+        else
+        {
+            textLabel.setText (translate ("GAME OVER! Nobody won. Press 'Reset' to play again."),
+                               dontSendNotification);
+        }
+    }
+}
+
+

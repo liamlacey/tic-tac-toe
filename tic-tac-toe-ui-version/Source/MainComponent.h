@@ -35,7 +35,10 @@ public:
 
 private:
     
+    void checkGameStatus();
+    
     void createGrid();
+    void disableGrid();
     
     //==============================================================================
     // Your private member variables go here...
