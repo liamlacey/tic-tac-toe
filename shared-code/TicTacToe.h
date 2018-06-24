@@ -20,22 +20,22 @@ public:
     ~TicTacToe();
     
     //Returns a grid state (see GridStateValues) for a given grid position
-    int getStateForGridPosition (int pos);
+    int getStateForGridPosition (const int pos) const;
     
     //Sets a grid state (see GridStateValues) to a given grid position
     //Returns -1 if it can't the grid position to to it already being used, else returns 0.
-    int setGridPositionStateForCurrentPlayer (int pos);
+    int setGridPositionStateForCurrentPlayer (const int pos);
     
     //Returns the current player nuumber in the range 0-1
-    int getCurrentPlayer();
+    int getCurrentPlayer() const;
     //Moves to the next player number
     void moveToNextPlayer();
     
     //Returns the current game status (see GameStatusValues)
-    int checkGameStatus();
+    int checkGameStatus() const;
     
     //Sets the grid size
-    void setGridSize (int gridSize_);
+    void setGridSize (const int gridSize_);
     
     //Resets all needed variables to restart the game
     void resetGame();

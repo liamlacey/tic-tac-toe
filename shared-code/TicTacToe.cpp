@@ -20,12 +20,12 @@ TicTacToe::~TicTacToe()
     
 }
 
-int TicTacToe::getStateForGridPosition (int pos)
+int TicTacToe::getStateForGridPosition (const int pos) const
 {
     return gridStates[pos];
 }
 
-int TicTacToe::getCurrentPlayer()
+int TicTacToe::getCurrentPlayer() const
 {
     return currentPlayer;
 }
@@ -35,7 +35,7 @@ void TicTacToe::moveToNextPlayer()
     currentPlayer = !currentPlayer;
 }
 
-int TicTacToe::setGridPositionStateForCurrentPlayer (int pos)
+int TicTacToe::setGridPositionStateForCurrentPlayer (const int pos)
 {
     auto result = 0;
     
@@ -49,7 +49,7 @@ int TicTacToe::setGridPositionStateForCurrentPlayer (int pos)
     return result;
 }
 
-int TicTacToe::checkGameStatus()
+int TicTacToe::checkGameStatus() const
 {
     int stateToCheckFor = GRID_STATE_UNUSED;
     
@@ -134,7 +134,7 @@ int TicTacToe::checkGameStatus()
     return GAME_STATUS_CONTINUE;
 }
 
-void TicTacToe::setGridSize (int gridSize_)
+void TicTacToe::setGridSize (const int gridSize_)
 {
     gridSize = gridSize_;
     gridStates.resize (gridSize * gridSize);
